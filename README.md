@@ -49,6 +49,7 @@ uv sync --all-extras
 ├── config/           # YAML configuration files
 ├── bash_script/      # Shell scripts for automation
 ├── python_script/    # Standalone execution scripts (has symlink to src/)
+├── memory_bank/      # Project documentation for AI-assisted development
 └── pyproject.toml    # Dependencies and tool configuration
 ```
 
@@ -102,6 +103,32 @@ Run tests:
 ```bash
 uv run pytest
 ```
+
+## Memory Bank
+
+The `memory_bank/` directory maintains structured project documentation for AI-assisted development. This helps AI assistants (like Cline) understand project context across sessions.
+
+### Core Documentation Files
+
+When using AI assistance, maintain these files in `memory_bank/`:
+
+- **`projectbrief.md`** - Foundation document defining core requirements and project scope
+- **`productContext.md`** - Why the project exists, problems it solves, user experience goals
+- **`activeContext.md`** - Current work focus, recent changes, next steps, and active decisions
+- **`systemPatterns.md`** - System architecture, design patterns, component relationships
+- **`techContext.md`** - Technologies used, development setup, technical constraints
+- **`progress.md`** - What works, what's left to build, current status, known issues
+
+### When to Update
+
+Update Memory Bank files when:
+- Starting a new feature or significant change
+- Discovering important project patterns
+- Making architectural decisions
+- Before/after major milestones
+- When context needs clarification for future work
+
+See `memory_bank/custom_instruction.md` for detailed guidelines.
 
 ## Best Practices
 
