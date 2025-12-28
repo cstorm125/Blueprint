@@ -1,0 +1,35 @@
+# ML Project Rules
+
+## Execution & Environment
+- **Runtime:** Always execute Python scripts using `uv run python <path_to_script>`.
+- **Dependencies:** Assume dependencies are managed via `uv`. Do not attempt to install packages unless explicitly asked.
+
+## Directory Structure (Singular Names Only)
+Strictly adhere to this folder hierarchy:
+- `src/`: Reusable package logic, models, and utility modules.
+- `data/`: Datasets. (Add to .gitignore: do not commit large files).
+- `log/`: Text logs and TensorBoard event files.
+- `checkpoint/`: Model weights and artifacts.
+- `notebook/`: Jupyter notebooks. **Must contain a symlink to `src/`.**
+- `config/`: Configuration files (use **YAML** format only).
+- `bash_script/`: Orchestration and automation shell scripts.
+- `python_script/`: Standalone execution scripts. **Must contain a symlink to `src/`.**
+
+## Import Logic & Symlinks
+- A symbolic link named `src` pointing to `../src` must exist within `notebook/` and `python_script/`.
+- Always use absolute imports from the root (e.g., `from src.models import Transformer`).
+
+## Tool-Specific Standards
+- **Data:** Prefer `polars` for performance; use `pandas` only for legacy compatibility.
+- **Math/DS:** Use `numpy`, `scipy`, and `sklearn`.
+- **Progress:** Always use `from tqdm.auto import tqdm`.
+- **Visualization:** Use `plotnine` (ggplot) and `seaborn`.
+- **Inference/LLM:** Use `vllm` for local inference. **Note:** Always set `gpu_memory_utilization` to avoid OOM if other tasks are running.
+- **Prompting:** Use `dspy` for structured prompt organization.
+- **Logging:** Use standard `logging`. Save to `log/`.
+- **Testing:** Use `pytest`. Focus on data shape validation and null checks.
+
+## Reproducibility & Config
+- **Seeding:** All entry-point scripts must set a global random seed for reproducibility.
+- **No Hardcoding:** All hyperparameters, GPU IDs, and paths must be loaded from `config/*.yaml`.
+- **Paths:** Use `pathlib.Path` for all directory manipulations to ensure cross-OS compatibility.
