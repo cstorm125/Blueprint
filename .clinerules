@@ -47,6 +47,7 @@ Strictly adhere to this folder hierarchy:
 ## Tool-Specific Standards
 - **Data:** Prefer `polars` for performance; use `pandas` only for legacy compatibility.
 - **Math/Data Science:** Use `numpy`, `scipy`, and `sklearn`.
+- **Deep Learning:** Use `torch` (PyTorch) for neural network training and model development. Set manual seeds for reproducibility (`torch.manual_seed()`, `torch.cuda.manual_seed_all()`).
 - **Progress:** Always use `from tqdm.auto import tqdm`.
 - **Visualization:** Use `plotnine` (ggplot) and `seaborn`.
 - **Inference/LLM:** Use `vllm` for local inference. **Note:** Always set `gpu_memory_utilization` to avoid OOM if other tasks are running.
