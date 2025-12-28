@@ -1,0 +1,7 @@
+# Project Configuration
+project_name: "ml_project"
+random_seed: 42
+paths:
+  data: "data/"
+  logs: "log/"
+  checkpoints: "checkpoint/"
