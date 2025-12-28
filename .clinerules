@@ -4,6 +4,12 @@
 - **Runtime:** Always execute Python scripts using `uv run python <path_to_script>`.
 - **Dependencies:** Assume dependencies are managed via `uv`. Do not attempt to install packages unless explicitly asked.
 
+## Environment & Secrets
+- **Environment Variables:** Store sensitive data (API keys, credentials) in `.env` files. Never commit `.env` to git.
+- **AWS Bedrock:** Use environment variables for AWS credentials and region settings. Load via `os.getenv()` or `python-dotenv`.
+- **dspy Configuration:** Store LLM API keys and model configurations in environment variables, not in code.
+- **Config Loading:** Use `config/*.yaml` for non-sensitive settings, `.env` for secrets.
+
 ## Directory Structure (Singular Names Only)
 Strictly adhere to this folder hierarchy:
 - `src/`: Reusable package logic, models, and utility modules.
@@ -19,15 +25,43 @@ Strictly adhere to this folder hierarchy:
 - A symbolic link named `src` pointing to `../src` must exist within `notebook/` and `python_script/`.
 - Always use absolute imports from the root (e.g., `from src.models import Transformer`).
 
+## Code Quality & Standards
+- **Formatting:** Use `ruff format` for code formatting (integrates with uv).
+- **Linting:** Use `ruff check` for linting and import sorting.
+- **Type Hints:** Use type hints for function signatures and class attributes.
+- **Docstrings:** Use minimal Google-style docstrings that explain: (1) what the function does, (2) inputs, and (3) outputs.
+  ```python
+  def process_data(df: pd.DataFrame, threshold: float = 0.5) -> pd.DataFrame:
+      """Clean and preprocess dataframe by removing nulls and filtering values.
+      
+      Args:
+          df: Raw input dataframe
+          threshold: Minimum value threshold for filtering
+          
+      Returns:
+          Cleaned and filtered dataframe
+      """
+  ```
+- **Naming:** Use snake_case for functions/variables, PascalCase for classes.
+
 ## Tool-Specific Standards
 - **Data:** Prefer `polars` for performance; use `pandas` only for legacy compatibility.
-- **Math/DS:** Use `numpy`, `scipy`, and `sklearn`.
+- **Math/Data Science:** Use `numpy`, `scipy`, and `sklearn`.
 - **Progress:** Always use `from tqdm.auto import tqdm`.
 - **Visualization:** Use `plotnine` (ggplot) and `seaborn`.
 - **Inference/LLM:** Use `vllm` for local inference. **Note:** Always set `gpu_memory_utilization` to avoid OOM if other tasks are running.
 - **Prompting:** Use `dspy` for structured prompt organization.
 - **Logging:** Use standard `logging`. Save to `log/`.
 - **Testing:** Use `pytest`. Focus on data shape validation and null checks.
+
+## Performance & Monitoring
+- **Memory Management:** Use `del` for large objects after use. Monitor memory with `psutil` in long-running scripts.
+- **GPU Memory:** Always set `gpu_memory_utilization=0.8` (or lower) in vllm to prevent OOM when other processes are running.
+- **Progress Tracking:** Use `tqdm.auto` for all loops processing large datasets or model training.
+- **Logging Levels:** Use INFO for progress updates, DEBUG for detailed tracing, ERROR for failures.
+- **Resource Monitoring:** Log GPU/CPU usage and memory consumption for training runs.
+- **Batch Processing:** Process data in chunks to avoid memory overflow with large datasets.
+- **Error Handling:** Wrap external API calls (Bedrock, vllm) in try-except blocks with proper logging.
 
 ## Reproducibility & Config
 - **Seeding:** All entry-point scripts must set a global random seed for reproducibility.
