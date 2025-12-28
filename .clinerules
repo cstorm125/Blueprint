@@ -20,6 +20,8 @@ Strictly adhere to this folder hierarchy:
 - `config/`: Configuration files (use **YAML** format only).
 - `bash_script/`: Orchestration and automation shell scripts.
 - `python_script/`: Standalone execution scripts. **Must contain a symlink to `src/`.**
+- `test/`: Unit tests and integration tests.
+- `memory_bank/`: Project documentation for AI-assisted development.
 
 ## Import Logic & Symlinks
 - A symbolic link named `src` pointing to `../src` must exist within `notebook/` and `python_script/`.

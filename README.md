@@ -4,21 +4,14 @@ A standardized template for machine learning projects with pre-configured depend
 
 ## Quick Start
 
-### 1. Initialize the project structure
-```bash
-bash bash_script/setup_structure.sh
-```
-
-This will create all necessary directories and symlinks.
-
-### 2. Install dependencies
+### 1. Install dependencies
 ```bash
 uv sync
 ```
 
 This will install all dependencies defined in `pyproject.toml`.
 
-### 3. Install optional dependencies
+### 2. Install optional dependencies
 
 **Development tools (cross-platform):**
 ```bash
@@ -49,6 +42,7 @@ uv sync --all-extras
 ├── config/           # YAML configuration files
 ├── bash_script/      # Shell scripts for automation
 ├── python_script/    # Standalone execution scripts (has symlink to src/)
+├── test/             # Unit tests and integration tests
 ├── memory_bank/      # Project documentation for AI-assisted development
 └── pyproject.toml    # Dependencies and tool configuration
 ```
