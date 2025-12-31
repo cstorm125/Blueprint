@@ -49,6 +49,13 @@ gpu = [
     "vllm>=0.4.0",
 ]
 
+# RAG with pgvector (optional)
+rag = [
+    "pgvector>=0.2.0",
+    "psycopg[binary]>=3.1.0",      # PostgreSQL driver
+    "sentence-transformers>=2.2.0", # Embedding models
+]
+
 [tool.ruff]
 line-length = 100
 target-version = "py310"

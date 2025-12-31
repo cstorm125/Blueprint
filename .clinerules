@@ -55,6 +55,12 @@ Strictly adhere to this folder hierarchy:
 - **Visualization:** Use `plotnine` (ggplot) and `seaborn`.
 - **Inference/LLM:** Use `vllm` for local inference. **Note:** Always set `gpu_memory_utilization` to avoid OOM if other tasks are running.
 - **Prompting:** Use `dspy` for structured prompt organization.
+- **RAG/Vector Search:** Use `pgvector` with PostgreSQL for hybrid search.
+  - **Embeddings:** Use `sentence-transformers` for generating embeddings.
+  - **Database:** Use `psycopg` (psycopg3) for PostgreSQL connections.
+  - **Hybrid Search:** Combine dense (vector) and sparse (full-text) search for best results.
+  - **Connection Management:** Use connection pooling for production, close connections properly.
+  - **Indexing:** Create appropriate indexes (IVFFlat or HNSW) based on data size and query patterns.
 - **Logging:** Use standard `logging`. Save to `log/`.
 - **Testing:** Use `pytest`. Focus on data shape validation and null checks.
 
